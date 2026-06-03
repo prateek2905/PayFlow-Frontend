@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .dot-grid {
+    background-image: radial-gradient(circle, #c8bfb4 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  .dark .dot-grid {
+    background-image: radial-gradient(circle, #334155 1px, transparent 1px);
+  }
+}
