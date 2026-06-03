@@ -13,6 +13,7 @@ export const Signup = () => {
     const [lastName, setLastName] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
     const navigate = useNavigate();
 
     return (
@@ -77,16 +78,26 @@ export const Signup = () => {
                                     type="password"
                                 />
                             </div>
-                            <div className="pt-5">
+                            {error && (
+                                <div className="mb-3 p-3 rounded-xl bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 text-sm text-center font-medium">
+                                    {error}
+                                </div>
+                            )}
+                            <div className="pt-2">
                                 <Button onClick={async () => {
-                                    const response = await axios.post("http://localhost:3000/api/v1/user/signup", {
-                                        username,
-                                        firstName,
-                                        lastName,
-                                        password
-                                    });
-                                    localStorage.setItem("token", response.data.token);
-                                    navigate("/dashboard");
+                                    setError("");
+                                    try {
+                                        const response = await axios.post("http://localhost:3000/api/v1/user/signup", {
+                                            username,
+                                            firstName,
+                                            lastName,
+                                            password
+                                        });
+                                        localStorage.setItem("token", response.data.token);
+                                        navigate("/dashboard");
+                                    } catch (e) {
+                                        setError(e.response?.data?.message || "Signup failed. Please try again.");
+                                    }
                                 }} label="Sign up" />
                             </div>
                             <BottomWarning label="Already have an account?" buttonText="Sign in" to="/signin" />

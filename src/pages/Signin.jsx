@@ -11,6 +11,7 @@ import { ThemeToggle } from "../components/ThemeToggle";
 export const Signin = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
     const navigate = useNavigate();
 
     return (
@@ -63,14 +64,24 @@ export const Signin = () => {
                                     type="password"
                                 />
                             </div>
-                            <div className="pt-5">
+                            {error && (
+                                <div className="mb-3 p-3 rounded-xl bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 text-sm text-center font-medium">
+                                    {error}
+                                </div>
+                            )}
+                            <div className="pt-2">
                                 <Button onClick={async () => {
-                                    const response = await axios.post("http://localhost:3000/api/v1/user/signin", {
-                                        username,
-                                        password
-                                    });
-                                    localStorage.setItem("token", response.data.token);
-                                    navigate("/dashboard");
+                                    setError("");
+                                    try {
+                                        const response = await axios.post("http://localhost:3000/api/v1/user/signin", {
+                                            username,
+                                            password
+                                        });
+                                        localStorage.setItem("token", response.data.token);
+                                        navigate("/dashboard");
+                                    } catch (e) {
+                                        setError(e.response?.data?.message || "Invalid email or password");
+                                    }
                                 }} label="Sign in" />
                             </div>
                             <BottomWarning label="Don't have an account?" buttonText="Sign up" to="/signup" />

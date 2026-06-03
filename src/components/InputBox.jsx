@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export function InputBox({ label, placeholder, onChange, type = "text" }) {
+export function InputBox({ label, placeholder, onChange, type = "text", value }) {
     const [show, setShow] = useState(false);
     const isPassword = type === "password";
 
@@ -14,6 +14,7 @@ export function InputBox({ label, placeholder, onChange, type = "text" }) {
                     onChange={onChange}
                     placeholder={placeholder}
                     type={isPassword ? (show ? "text" : "password") : type}
+                    value={value !== undefined ? value : undefined}
                     className="w-full px-3 py-2.5 border border-stone-200 dark:border-slate-600 rounded-xl bg-white dark:bg-slate-800 text-stone-900 dark:text-slate-100 placeholder-stone-400 dark:placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition pr-9"
                 />
                 {isPassword && (
