@@ -7,6 +7,10 @@ export const Users = () => {
     const [filter, setFilter] = useState("");
 
     useEffect(() => {
+        if (!filter) {
+            setUsers([]);
+            return;
+        }
         axios.get("http://localhost:3000/api/v1/user/bulk?filter=" + filter, {
             headers: { Authorization: "Bearer " + localStorage.getItem("token") }
         })
@@ -31,7 +35,9 @@ export const Users = () => {
             <div className="divide-y divide-stone-100 dark:divide-slate-800">
                 {users.map(user => <User key={user._id} user={user} />)}
                 {users.length === 0 && (
-                    <p className="text-center text-stone-400 dark:text-slate-500 text-sm py-6">No users found</p>
+                    <p className="text-center text-stone-400 dark:text-slate-500 text-sm py-6">
+                        {filter ? "No users found" : "Search for a user to send money"}
+                    </p>
                 )}
             </div>
         </div>

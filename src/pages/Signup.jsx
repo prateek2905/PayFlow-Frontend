@@ -19,7 +19,7 @@ export const Signup = () => {
     return (
         <div className="min-h-screen flex bg-stone-50 dark:bg-slate-950">
             {/* Left branding panel */}
-            <div className="hidden lg:flex lg:w-1/2 dot-grid bg-stone-100 dark:bg-slate-900 flex-col justify-between p-12">
+            <div className="hidden lg:flex lg:w-1/2 dot-grid bg-stone-100 dark:bg-slate-900 border-r border-stone-200 dark:border-slate-800 flex-col justify-between p-12">
                 <div className="flex items-center gap-2">
                     <span className="text-2xl">💸</span>
                     <span className="font-bold text-xl text-stone-900 dark:text-slate-100 tracking-tight">PayFlow</span>

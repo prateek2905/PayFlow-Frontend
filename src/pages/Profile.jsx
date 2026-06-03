@@ -46,8 +46,8 @@ export const Profile = () => {
     };
 
     return (
-        <div className="min-h-screen dot-grid bg-stone-50 dark:bg-slate-950 flex flex-col">
-            <div className="flex items-center justify-between p-4 px-6">
+        <div className="min-h-screen dot-grid bg-stone-50 dark:bg-slate-950 grid grid-cols-[1fr_min(28rem,100%)_1fr] grid-rows-[auto_1fr]">
+            <div className="col-span-3 flex items-center justify-between p-4 px-6">
                 <button
                     onClick={() => navigate("/dashboard")}
                     className="flex items-center gap-1.5 text-sm text-stone-500 dark:text-slate-400 hover:text-stone-800 dark:hover:text-slate-200 transition-colors"
@@ -59,9 +59,9 @@ export const Profile = () => {
                 </button>
                 <ThemeToggle />
             </div>
-
-            <div className="flex-1 flex items-center justify-center px-6">
-                <div className="w-full max-w-md bg-white dark:bg-slate-900 border border-stone-200 dark:border-slate-700 rounded-2xl shadow-sm overflow-hidden">
+            <div className="border-r border-stone-200 dark:border-slate-800" />
+            <div className="flex items-center justify-center py-8 px-4">
+                <div className="w-full bg-white dark:bg-slate-900 border border-stone-200 dark:border-slate-700 rounded-2xl shadow-sm overflow-hidden">
                     <div className="px-8 pt-8 pb-6 border-b border-stone-100 dark:border-slate-800">
                         <h2 className="text-2xl font-bold text-stone-900 dark:text-slate-100 text-center">Edit Profile</h2>
                         <p className="text-sm text-stone-500 dark:text-slate-400 text-center mt-1">Update your account information</p>
@@ -107,6 +107,7 @@ export const Profile = () => {
                     </div>
                 </div>
             </div>
+            <div className="border-l border-stone-200 dark:border-slate-800" />
         </div>
     );
 };

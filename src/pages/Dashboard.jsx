@@ -17,11 +17,15 @@ export const Dashboard = () => {
     }, []);
 
     return (
-        <div className="min-h-screen bg-stone-50 dark:bg-slate-950">
+        <div className="min-h-screen bg-stone-50 dark:bg-slate-950 flex flex-col">
             <Appbar userName={user.firstName || "..."} userInitial={(user.firstName?.[0] || "U").toUpperCase()} />
-            <div className="max-w-2xl mx-auto px-6 py-8">
-                <Balance value={balance !== null ? balance.toLocaleString() : "..."} />
-                <Users />
+            <div className="flex-1 grid grid-cols-[1fr_min(42rem,100%)_1fr]">
+                <div className="border-r border-stone-200 dark:border-slate-800" />
+                <div className="px-6 py-8">
+                    <Balance value={balance !== null ? balance.toLocaleString() : "..."} />
+                    <Users />
+                </div>
+                <div className="border-l border-stone-200 dark:border-slate-800" />
             </div>
         </div>
     );

@@ -25,18 +25,17 @@ export const SendMoney = () => {
     };
 
     return (
-        <div className="min-h-screen dot-grid bg-stone-50 dark:bg-slate-950 flex flex-col">
-            <div className="flex justify-end p-4">
+        <div className="min-h-screen dot-grid bg-stone-50 dark:bg-slate-950 grid grid-cols-[1fr_min(28rem,100%)_1fr] grid-rows-[auto_1fr]">
+            <div className="col-span-3 flex justify-end p-4">
                 <ThemeToggle />
             </div>
-            <div className="flex-1 flex items-center justify-center px-6">
-                <div className="w-full max-w-md bg-white dark:bg-slate-900 border border-stone-200 dark:border-slate-700 rounded-2xl shadow-sm overflow-hidden">
-                    {/* Header */}
+            <div className="border-r border-stone-200 dark:border-slate-800" />
+            <div className="flex items-center justify-center py-8 px-4">
+                <div className="w-full bg-white dark:bg-slate-900 border border-stone-200 dark:border-slate-700 rounded-2xl shadow-sm overflow-hidden">
                     <div className="px-8 pt-8 pb-6 border-b border-stone-100 dark:border-slate-800">
                         <h2 className="text-2xl font-bold text-stone-900 dark:text-slate-100 text-center">Send Money</h2>
                     </div>
 
-                    {/* Recipient */}
                     <div className="px-8 py-6">
                         <div className="flex items-center gap-4 mb-6">
                             <div className="w-12 h-12 rounded-full bg-emerald-100 dark:bg-emerald-900 flex items-center justify-center flex-shrink-0">
@@ -50,7 +49,6 @@ export const SendMoney = () => {
                             </div>
                         </div>
 
-                        {/* Amount input */}
                         <div className="mb-5">
                             <label className="block text-sm font-medium text-stone-700 dark:text-slate-300 mb-2">
                                 Amount (in Rs)
@@ -83,6 +81,7 @@ export const SendMoney = () => {
                     </div>
                 </div>
             </div>
+            <div className="border-l border-stone-200 dark:border-slate-800" />
         </div>
     );
 };
