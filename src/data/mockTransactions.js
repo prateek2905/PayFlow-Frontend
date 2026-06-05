@@ -10,7 +10,7 @@ export function mapApiTransaction(tx) {
         name: tx.name,
         tag: tx.tag?.name || 'other',
         icon: TAG_ICONS[tagName] || '💳',
-        amount: tx.type === 'debit' ? -tx.value : tx.value,
+        amount: (tx.type === 'credit' || tx.type === 'income') ? tx.value : -tx.value,
         dateLabel: new Date(tx.date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' }),
         isoDate: tx.date,
     };
