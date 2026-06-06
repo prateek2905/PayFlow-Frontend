@@ -2,8 +2,9 @@ import { useSearchParams, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { useState, useEffect, useRef } from 'react';
 import { ThemeToggle } from '../components/ThemeToggle';
+import BASE_URL from '../api';
 
-const API = "http://localhost:3000/api/v1";
+const API = `${BASE_URL}/api/v1`;
 
 function TagPicker({ selectedTag, onSelect }) {
     const [query, setQuery] = useState(selectedTag?.name || "");

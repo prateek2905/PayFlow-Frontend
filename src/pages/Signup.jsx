@@ -1,3 +1,4 @@
+import BASE_URL from '../api';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -87,7 +88,7 @@ export const Signup = () => {
                                 <Button onClick={async () => {
                                     setError("");
                                     try {
-                                        const response = await axios.post("http://localhost:3000/api/v1/user/signup", {
+                                        const response = await axios.post(`${BASE_URL}/api/v1/user/signup`, {
                                             username,
                                             firstName,
                                             lastName,

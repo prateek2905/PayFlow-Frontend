@@ -1,3 +1,4 @@
+import BASE_URL from '../api';
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -213,14 +214,14 @@ export const Dashboard = () => {
   const authHeader = { Authorization: "Bearer " + localStorage.getItem("token") };
 
   useEffect(() => {
-    axios.get("http://localhost:3000/api/v1/account/balance", { headers: authHeader })
+    axios.get(`${BASE_URL}/api/v1/account/balance`, { headers: authHeader })
       .then(res => setBalance(res.data.balance)).catch(() => {});
-    axios.get("http://localhost:3000/api/v1/user/me", { headers: authHeader })
+    axios.get(`${BASE_URL}/api/v1/user/me`, { headers: authHeader })
       .then(res => setUser(res.data)).catch(() => navigate("/signin"));
-    axios.get("http://localhost:3000/api/v1/account/transactions", { headers: authHeader })
+    axios.get(`${BASE_URL}/api/v1/account/transactions`, { headers: authHeader })
       .then(res => setTransactions(res.data.transactions.map(mapApiTransaction)))
       .catch(() => {});
-    axios.get("http://localhost:3000/api/v1/budgets", { headers: authHeader })
+    axios.get(`${BASE_URL}/api/v1/budgets`, { headers: authHeader })
       .then(res => setBudgets(res.data.budgets)).catch(() => {});
   }, []);
 

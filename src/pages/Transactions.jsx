@@ -1,3 +1,4 @@
+import BASE_URL from '../api';
 import { useState, useMemo, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -40,7 +41,7 @@ export const Transactions = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get("http://localhost:3000/api/v1/account/transactions", {
+        axios.get(`${BASE_URL}/api/v1/account/transactions`, {
             headers: { Authorization: "Bearer " + localStorage.getItem("token") }
         })
             .then(res => setTransactions(res.data.transactions.map(mapApiTransaction)))

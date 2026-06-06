@@ -1,3 +1,4 @@
+import BASE_URL from '../api';
 import { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -23,7 +24,7 @@ export const Profile = () => {
     const authHeader = { Authorization: "Bearer " + localStorage.getItem("token") };
 
     const loadBudgets = useCallback(() => {
-        axios.get("http://localhost:3000/api/v1/budgets", { headers: authHeader })
+        axios.get(`${BASE_URL}/api/v1/budgets`, { headers: authHeader })
             .then(res => {
                 const map = {};
                 const inputMap = {};
@@ -38,14 +39,14 @@ export const Profile = () => {
     }, []);
 
     useEffect(() => {
-        axios.get("http://localhost:3000/api/v1/user/me", { headers: authHeader })
+        axios.get(`${BASE_URL}/api/v1/user/me`, { headers: authHeader })
             .then(res => {
                 setFirstName(res.data.firstName);
                 setLastName(res.data.lastName);
                 setMonthlyIncome(res.data.monthlyIncome > 0 ? String(res.data.monthlyIncome) : "");
             })
             .catch(() => navigate("/signin"));
-        axios.get("http://localhost:3000/api/v1/tags", { headers: authHeader })
+        axios.get(`${BASE_URL}/api/v1/tags`, { headers: authHeader })
             .then(res => setTags(res.data.tags || [])).catch(() => {});
         loadBudgets();
     }, []);
@@ -65,7 +66,7 @@ export const Profile = () => {
         }
 
         try {
-            await axios.put("http://localhost:3000/api/v1/user/update", payload, { headers: authHeader });
+            await axios.put(`${BASE_URL}/api/v1/user/update`, payload, { headers: authHeader });
             setStatus("success");
             setPassword("");
         } catch (e) {
@@ -78,7 +79,7 @@ export const Profile = () => {
         if (isNaN(amount) || amount < 0) return;
         setBudgetStatus(s => ({ ...s, [tag._id]: "saving" }));
         try {
-            await axios.put(`http://localhost:3000/api/v1/budgets/${tag._id}`, { amount }, { headers: authHeader });
+            await axios.put(`${BASE_URL}/api/v1/budgets/${tag._id}`, { amount }, { headers: authHeader });
             setSavedBudgets(s => ({ ...s, [tag._id]: amount }));
             setBudgetStatus(s => ({ ...s, [tag._id]: "saved" }));
             setTimeout(() => setBudgetStatus(s => ({ ...s, [tag._id]: undefined })), 1500);
@@ -92,7 +93,7 @@ export const Profile = () => {
     const handleRemoveBudget = async (tagId) => {
         setBudgetStatus(s => ({ ...s, [tagId]: "removing" }));
         try {
-            await axios.delete(`http://localhost:3000/api/v1/budgets/${tagId}`, { headers: authHeader });
+            await axios.delete(`${BASE_URL}/api/v1/budgets/${tagId}`, { headers: authHeader });
             setSavedBudgets(s => { const n = { ...s }; delete n[tagId]; return n; });
             setBudgets(s => { const n = { ...s }; delete n[tagId]; return n; });
             setBudgetStatus(s => { const n = { ...s }; delete n[tagId]; return n; });

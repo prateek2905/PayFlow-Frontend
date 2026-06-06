@@ -1,3 +1,4 @@
+import BASE_URL from '../api';
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +12,7 @@ export const Users = () => {
             setUsers([]);
             return;
         }
-        axios.get("http://localhost:3000/api/v1/user/bulk?filter=" + filter, {
+        axios.get(`${BASE_URL}/api/v1/user/bulk?filter=` + filter, {
             headers: { Authorization: "Bearer " + localStorage.getItem("token") }
         })
             .then(response => setUsers(response.data.user))
